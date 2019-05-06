@@ -1,9 +1,6 @@
 package test.mongodb;
 
-import com.mongodb.BasicDBObject;
-import com.mongodb.DB;
-import com.mongodb.DBObject;
-import com.mongodb.MongoClient;
+import com.mongodb.*;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
@@ -12,6 +9,9 @@ import org.bson.Document;
 import test.mongodb.bean.Person;
 
 import java.net.UnknownHostException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class TestMongoDB {
 
@@ -23,11 +23,17 @@ public class TestMongoDB {
     public static void main(String[] args) {
         
             try {
-                MongoClient mongo = new MongoClient("localhost",27017);
-                
+                MongoCredential credential = MongoCredential.createScramSha1Credential("imsuser", "ims", "q111111".toCharArray());
+
+
+                List<MongoCredential> credentials = new ArrayList<MongoCredential>();
+                credentials.add(credential);
+
+                MongoClient mongo = new MongoClient(new ServerAddress("192.168.23.163", 27017), credentials);
+
                 MongoDatabase db = mongo.getDatabase("ims");
 
-                MongoCollection collection = db.getCollection("ims");
+                MongoCollection collection = db.getCollection("user");
 
                 /*Document user = new Document("name", "yuan")
                         .append("age", 18);

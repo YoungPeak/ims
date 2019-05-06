@@ -1,11 +1,14 @@
 package business.bean;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class UserBean {
-	@Id
+@Document(collection = "user")
+public class UserBean implements Serializable {
+
 	private String id;
 	private String name;
 	private String email;
@@ -42,5 +45,16 @@ public class UserBean {
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	@Override
+	public String toString() {
+		return "UserBean{" +
+				"id='" + id + '\'' +
+				", name='" + name + '\'' +
+				", email='" + email + '\'' +
+				", time=" + time +
+				", password='" + password + '\'' +
+				'}';
 	}
 }

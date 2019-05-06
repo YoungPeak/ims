@@ -9,12 +9,11 @@
        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <mongo:mongo-client id="mongoClient" host="localhost" port="27017" />
+    <mongo:mongo-client id="mongoClient" host="192.168.23.163" port="27017" credentials="imsuser:q111111@ims" />
 
     <bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
         <constructor-arg ref="mongoClient" />
-        <constructor-arg name="databaseName" value="cssg" />
-        <property name="writeConcern" value="SAFE"></property>
+        <constructor-arg name="databaseName" value="ims" />
 
     </bean>
     <context:annotation-config />

@@ -38,7 +38,7 @@
           <el-dropdown-item>删除</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
-      <span style="float:right">王小虎</span>
+      <span style="float:right">{{username}}</span>
     </el-header>
     <el-container>
       <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
@@ -78,6 +78,7 @@
 <script type="text/javascript" src="js/vue.js"></script>
 <!-- import JavaScript -->
 <script type="text/javascript" src="js/index.js"></script>
+<script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
 <script>
   var Main = {
     data() {
@@ -87,11 +88,18 @@
         address: '上海市普陀区金沙江路 1518 弄'
       };
       return {
-        tableData: Array(20).fill(item)
+        tableData: Array(20).fill(item),
+          username: ""
       }
     }
   };
   var Ctor = Vue.extend(Main)
-  new Ctor().$mount('#app')
+  var app = new Ctor().$mount('#app')
+  app.$http.get("test.do", {params:{"username":"admin"}}).then(function(res) {
+      console.log(res.body)
+      this.username = res.body.name;
+  }, function (res) {
+      console.log(res)
+  });
 </script>
 </html>
