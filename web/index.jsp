@@ -78,7 +78,7 @@
 <script type="text/javascript" src="js/vue.js"></script>
 <!-- import JavaScript -->
 <script type="text/javascript" src="js/index.js"></script>
-<script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
+<script src="js/axios.min.js"></script>
 <script>
   var Main = {
     data() {
@@ -95,9 +95,9 @@
   };
   var Ctor = Vue.extend(Main)
   var app = new Ctor().$mount('#app')
-  app.$http.get("test.do", {params:{"username":"admin"}}).then(function(res) {
-      console.log(res.body)
-      this.username = res.body.name;
+  axios.get("test.do", {params:{"username":"admin"}}).then(res => {
+      console.log(res.data)
+      app.username = res.data.name;
   }, function (res) {
       console.log(res)
   });
